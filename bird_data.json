@@ -1,0 +1,201 @@
+{
+  "birds": {
+    "australian-magpie": {
+      "displayName": "Australian Magpie",
+      "folder": "australian-magpie",
+      "seasons": {
+        "spring": ["04:30"],
+        "summer": ["04:00"],
+        "autumn": ["05:00"],
+        "winter": ["06:00"]
+      }
+    },
+    "laughing-kookaburra": {
+      "displayName": "Laughing Kookaburra",
+      "folder": "laughing-kookaburra",
+      "seasons": {
+        "spring": ["05:00"],
+        "summer": ["04:30"],
+        "autumn": ["05:30"],
+        "winter": ["06:30"]
+      }
+    },
+    "superb-fairywren": {
+      "displayName": "Superb Fairywren",
+      "folder": "superb-fairywren",
+      "seasons": {
+        "spring": ["05:30"],
+        "summer": ["05:00"],
+        "autumn": ["06:00"],
+        "winter": ["08:00"]
+      }
+    },
+    "noisy-friarbird": {
+      "displayName": "Noisy Friarbird",
+      "folder": "noisy-friarbird",
+      "seasons": {
+        "spring": ["06:00"],
+        "summer": ["05:30"],
+        "autumn": ["06:30"],
+        "winter": ["07:30"]
+      }
+    },
+    "rainbow-lorikeet": {
+      "displayName": "Rainbow Lorikeet",
+      "folder": "rainbow-lorikeet",
+      "seasons": {
+        "spring": ["06:30"],
+        "summer": ["06:00"],
+        "autumn": ["07:00"],
+        "winter": ["08:30"]
+      }
+    },
+    "crimson-rosella": {
+      "displayName": "Crimson Rosella",
+      "folder": "crimson-rosella",
+      "seasons": {
+        "spring": ["07:00"],
+        "summer": ["07:00"],
+        "autumn": ["08:00"],
+        "winter": ["07:00"]
+      }
+    },
+    "galah": {
+      "displayName": "Galah",
+      "folder": "galah",
+      "seasons": {
+        "spring": ["08:00"],
+        "summer": ["08:00"],
+        "autumn": ["09:00"],
+        "winter": ["09:00"]
+      }
+    },
+    "sulphur-crested-cockatoo": {
+      "displayName": "Sulphur-crested Cockatoo",
+      "folder": "sulphur-crested-cockatoo",
+      "seasons": {
+        "spring": ["09:00"],
+        "summer": ["09:00"],
+        "autumn": ["10:00"],
+        "winter": ["10:00"]
+      }
+    },
+    "australian-king-parrot": {
+      "displayName": "Australian King Parrot",
+      "folder": "australian-king-parrot",
+      "seasons": {
+        "spring": ["10:00"],
+        "summer": ["10:00"],
+        "autumn": ["12:00"],
+        "winter": ["12:00"]
+      }
+    },
+    "pied-currawong": {
+      "displayName": "Pied Currawong",
+      "folder": "pied-currawong",
+      "seasons": {
+        "spring": ["11:00"],
+        "summer": ["11:00"],
+        "autumn": ["13:00"],
+        "winter": ["13:00"]
+      }
+    },
+    "red-wattlebird": {
+      "displayName": "Red Wattlebird",
+      "folder": "red-wattlebird",
+      "seasons": {
+        "spring": ["12:00"],
+        "summer": ["12:00"],
+        "autumn": ["14:00"],
+        "winter": ["14:00"]
+      }
+    },
+    "eastern-spinebill": {
+      "displayName": "Eastern Spinebill",
+      "folder": "eastern-spinebill",
+      "seasons": {
+        "spring": ["13:00"],
+        "summer": ["13:00"],
+        "autumn": ["15:00"],
+        "winter": ["15:00"]
+      }
+    },
+    "welcome-swallow": {
+      "displayName": "Welcome Swallow",
+      "folder": "welcome-swallow",
+      "seasons": {
+        "spring": ["14:00"],
+        "summer": ["14:00"],
+        "autumn": ["16:00"],
+        "winter": ["16:00"]
+      }
+    },
+    "willie-wagtail": {
+      "displayName": "Willie Wagtail",
+      "folder": "willie-wagtail",
+      "seasons": {
+        "spring": ["15:00"],
+        "summer": ["15:00"],
+        "autumn": ["17:00"],
+        "winter": ["15:00"]
+      }
+    },
+    "white-throated-treecreeper": {
+      "displayName": "White-throated Treecreeper",
+      "folder": "white-throated-treecreeper",
+      "seasons": {
+        "spring": ["16:00"],
+        "summer": ["16:00"],
+        "autumn": ["18:00"],
+        "winter": ["16:00"]
+      }
+    },
+    "spotted-pardalote": {
+      "displayName": "Spotted Pardalote",
+      "folder": "spotted-pardalote",
+      "seasons": {
+        "spring": ["17:00"],
+        "summer": ["17:00"],
+        "autumn": ["16:00"],
+        "winter": ["17:00"]
+      }
+    },
+    "tawny-frogmouth": {
+      "displayName": "Tawny Frogmouth",
+      "folder": "tawny-frogmouth",
+      "seasons": {
+        "spring": ["18:00"],
+        "summer": ["18:30"],
+        "autumn": ["19:00"],
+        "winter": ["18:00"]
+      }
+    },
+    "gang-gang-cockatoo": {
+      "displayName": "Gang-gang Cockatoo",
+      "folder": "gang-gang-cockatoo",
+      "seasons": {
+        "autumn": ["11:00"],
+        "winter": ["11:00"]
+      }
+    },
+    "flame-robin": {
+      "displayName": "Flame Robin",
+      "folder": "flame-robin",
+      "seasons": {
+        "winter": ["07:30"]
+      }
+    }
+  },
+  "seasons": {
+    "spring": { "months": [9, 10, 11] },
+    "summer": { "months": [12, 1, 2] },
+    "autumn": { "months": [3, 4, 5] },
+    "winter": { "months": [6, 7, 8] }
+  },
+  "quietHours": {
+    "spring": { "start": "19:00", "end": "04:30" },
+    "summer": { "start": "19:00", "end": "04:00" },
+    "autumn": { "start": "20:00", "end": "05:00" },
+    "winter": { "start": "19:00", "end": "06:00" }
+  }
+}
