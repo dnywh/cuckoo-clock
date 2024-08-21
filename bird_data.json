@@ -130,9 +130,9 @@
         "winter": ["16:00"]
       }
     },
-    "willie-wagtail-test": {
-      "name": "Willie Wagtail Test",
-      "slug": "willie-wagtail-test",
+    "willie-wagtail": {
+      "name": "Willie Wagtail",
+      "slug": "willie-wagtail",
       "seasons": {
         "spring": ["15:00"],
         "summer": ["15:00"],
