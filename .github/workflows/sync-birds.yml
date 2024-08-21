@@ -1,4 +1,4 @@
-name: Sync JSON to cuckoo-clock-site
+name: Sync Bird Data and Images
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "bird_data.json"
+      - "birds/**/*.jpg"
 
 jobs:
   sync:
@@ -27,10 +28,15 @@ jobs:
         run: |
           cp cuckoo-clock/bird_data.json cuckoo-clock-site/src/data/bird_data.json
 
+      - name: Copy JPG files
+        run: |
+          mkdir -p cuckoo-clock-site/public/images
+          find cuckoo-clock/birds -name "*.jpg" -exec cp {} cuckoo-clock-site/public/images/ \;
+
       - name: Commit and push if changed
         run: |
           cd cuckoo-clock-site
           git config user.name dnywh
           git config user.email "3104761+dnywh@users.noreply.github.com"
           git add .
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update birds.json"; git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Updated bird data and images"; git push)
