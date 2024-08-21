@@ -50,14 +50,14 @@ The CRON schedule should match the quiet hours for each of the four seasons set 
 
 ### Running the Project
 
-1. Ensure you have the `birds.json` file in the project directory.
+1. Ensure you have the `birds_data.json` file in the project directory.
 
 2. Create a `birds` folder in the project directory with subfolders for each bird, containing the images (`.jpg`) and sound files (`.mp3`).
 
 3. Run the script:
 
    ```
-   python bird_clock.py
+   python clock.py
    ```
 
    - On Mac or non-Raspberry Pi systems, you can interact with the program using keyboard inputs:

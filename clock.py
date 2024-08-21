@@ -35,18 +35,18 @@ BIRDS_FOLDER = "birds"
 
 
 def load_image(bird_key):
-    folder = bird_data["birds"][bird_key]["folder"]
-    image_path = os.path.join(BIRDS_FOLDER, folder, f"{folder}.jpg")
+    slug = bird_data["birds"][bird_key]["slug"]
+    image_path = os.path.join(BIRDS_FOLDER, slug, f"{slug}.jpg")
     try:
         return Image.open(image_path)
     except FileNotFoundError:
-        print(f"Image not found for {bird_data['birds'][bird_key]['displayName']}")
+        print(f"Image not found for {bird_data['birds'][bird_key]['name']}")
         return None
 
 
 def play_random_sound(bird_key):
-    folder = bird_data["birds"][bird_key]["folder"]
-    sound_folder = os.path.join(BIRDS_FOLDER, folder)
+    slug = bird_data["birds"][bird_key]["slug"]
+    sound_folder = os.path.join(BIRDS_FOLDER, slug)
     sound_files = [f for f in os.listdir(sound_folder) if f.endswith(".mp3")]
     if sound_files:
         chosen_sound = random.choice(sound_files)
@@ -54,15 +54,13 @@ def play_random_sound(bird_key):
         try:
             pygame.mixer.music.load(sound_path)
             pygame.mixer.music.play()
-            print(
-                f"Playing {chosen_sound} for {bird_data['birds'][bird_key]['displayName']}"
-            )
+            print(f"Playing {chosen_sound} for {bird_data['birds'][bird_key]['name']}")
         except pygame.error as e:
             print(
-                f"Error playing sound for {bird_data['birds'][bird_key]['displayName']}: {e}"
+                f"Error playing sound for {bird_data['birds'][bird_key]['name']}: {e}"
             )
     else:
-        print(f"No sound files found for {bird_data['birds'][bird_key]['displayName']}")
+        print(f"No sound files found for {bird_data['birds'][bird_key]['name']}")
 
 
 def display_image(bird_key):
@@ -72,16 +70,14 @@ def display_image(bird_key):
             # Here you would send the image to your e-ink display
             # For example: display_eink(image)
             print(
-                f"Displaying image for {bird_data['birds'][bird_key]['displayName']} on e-ink display"
+                f"Displaying image for {bird_data['birds'][bird_key]['name']} on e-ink display"
             )
         else:
             # For development on Mac, just show the image using PIL
             image.show()
-        print(f"Displaying image for {bird_data['birds'][bird_key]['displayName']}")
+        print(f"Displaying image for {bird_data['birds'][bird_key]['name']}")
     else:
-        print(
-            f"Failed to display image for {bird_data['birds'][bird_key]['displayName']}"
-        )
+        print(f"Failed to display image for {bird_data['birds'][bird_key]['name']}")
 
 
 def get_current_bird(current_datetime):
@@ -135,7 +131,7 @@ def main():
         display_image(current_bird)
     print(f"Current time: {simulated_datetime.strftime('%H:%M')} in {current_season}")
     print(
-        f"Current bird: {bird_data['birds'][current_bird]['displayName'] if current_bird in bird_data['birds'] else current_bird}"
+        f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
     )
 
     def handle_input(input_key):
@@ -155,7 +151,7 @@ def main():
                 f"Current time: {simulated_datetime.strftime('%H:%M')} - {current_season}"
             )
             print(
-                f"Current bird: {bird_data['birds'][current_bird]['displayName'] if current_bird in bird_data['birds'] else current_bird}"
+                f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
             )
 
         if input_key in ["s", "sound"]:
@@ -206,7 +202,7 @@ def main():
                         f"Current time: {simulated_datetime.strftime('%H:%M')} - {current_season}"
                     )
                     print(
-                        f"Current bird: {bird_data['birds'][current_bird]['displayName'] if current_bird in bird_data['birds'] else current_bird}"
+                        f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
                     )
                 time.sleep(30)  # Check every 30 seconds on Raspberry Pi
             else:

@@ -1,8 +1,8 @@
 {
   "birds": {
     "australian-magpie": {
-      "displayName": "Australian Magpie",
-      "folder": "australian-magpie",
+      "name": "Australian Magpie",
+      "slug": "australian-magpie",
       "seasons": {
         "spring": ["04:30"],
         "summer": ["04:00"],
@@ -11,8 +11,8 @@
       }
     },
     "laughing-kookaburra": {
-      "displayName": "Laughing Kookaburra",
-      "folder": "laughing-kookaburra",
+      "name": "Laughing Kookaburra",
+      "slug": "laughing-kookaburra",
       "seasons": {
         "spring": ["05:00"],
         "summer": ["04:30"],
@@ -21,8 +21,8 @@
       }
     },
     "superb-fairywren": {
-      "displayName": "Superb Fairywren",
-      "folder": "superb-fairywren",
+      "name": "Superb Fairywren",
+      "slug": "superb-fairywren",
       "seasons": {
         "spring": ["05:30"],
         "summer": ["05:00"],
@@ -31,8 +31,8 @@
       }
     },
     "noisy-friarbird": {
-      "displayName": "Noisy Friarbird",
-      "folder": "noisy-friarbird",
+      "name": "Noisy Friarbird",
+      "slug": "noisy-friarbird",
       "seasons": {
         "spring": ["06:00"],
         "summer": ["05:30"],
@@ -41,8 +41,8 @@
       }
     },
     "rainbow-lorikeet": {
-      "displayName": "Rainbow Lorikeet",
-      "folder": "rainbow-lorikeet",
+      "name": "Rainbow Lorikeet",
+      "slug": "rainbow-lorikeet",
       "seasons": {
         "spring": ["06:30"],
         "summer": ["06:00"],
@@ -51,8 +51,8 @@
       }
     },
     "crimson-rosella": {
-      "displayName": "Crimson Rosella",
-      "folder": "crimson-rosella",
+      "name": "Crimson Rosella",
+      "slug": "crimson-rosella",
       "seasons": {
         "spring": ["07:00"],
         "summer": ["07:00"],
@@ -61,8 +61,8 @@
       }
     },
     "galah": {
-      "displayName": "Galah",
-      "folder": "galah",
+      "name": "Galah",
+      "slug": "galah",
       "seasons": {
         "spring": ["08:00"],
         "summer": ["08:00"],
@@ -71,8 +71,8 @@
       }
     },
     "sulphur-crested-cockatoo": {
-      "displayName": "Sulphur-crested Cockatoo",
-      "folder": "sulphur-crested-cockatoo",
+      "name": "Sulphur-crested Cockatoo",
+      "slug": "sulphur-crested-cockatoo",
       "seasons": {
         "spring": ["09:00"],
         "summer": ["09:00"],
@@ -81,8 +81,8 @@
       }
     },
     "australian-king-parrot": {
-      "displayName": "Australian King Parrot",
-      "folder": "australian-king-parrot",
+      "name": "Australian King Parrot",
+      "slug": "australian-king-parrot",
       "seasons": {
         "spring": ["10:00"],
         "summer": ["10:00"],
@@ -91,8 +91,8 @@
       }
     },
     "pied-currawong": {
-      "displayName": "Pied Currawong",
-      "folder": "pied-currawong",
+      "name": "Pied Currawong",
+      "slug": "pied-currawong",
       "seasons": {
         "spring": ["11:00"],
         "summer": ["11:00"],
@@ -101,8 +101,8 @@
       }
     },
     "red-wattlebird": {
-      "displayName": "Red Wattlebird",
-      "folder": "red-wattlebird",
+      "name": "Red Wattlebird",
+      "slug": "red-wattlebird",
       "seasons": {
         "spring": ["12:00"],
         "summer": ["12:00"],
@@ -111,8 +111,8 @@
       }
     },
     "eastern-spinebill": {
-      "displayName": "Eastern Spinebill",
-      "folder": "eastern-spinebill",
+      "name": "Eastern Spinebill",
+      "slug": "eastern-spinebill",
       "seasons": {
         "spring": ["13:00"],
         "summer": ["13:00"],
@@ -121,8 +121,8 @@
       }
     },
     "welcome-swallow": {
-      "displayName": "Welcome Swallow",
-      "folder": "welcome-swallow",
+      "name": "Welcome Swallow",
+      "slug": "welcome-swallow",
       "seasons": {
         "spring": ["14:00"],
         "summer": ["14:00"],
@@ -131,8 +131,8 @@
       }
     },
     "willie-wagtail": {
-      "displayName": "Willie Wagtail",
-      "folder": "willie-wagtail",
+      "name": "Willie Wagtail",
+      "slug": "willie-wagtail",
       "seasons": {
         "spring": ["15:00"],
         "summer": ["15:00"],
@@ -141,8 +141,8 @@
       }
     },
     "white-throated-treecreeper": {
-      "displayName": "White-throated Treecreeper",
-      "folder": "white-throated-treecreeper",
+      "name": "White-throated Treecreeper",
+      "slug": "white-throated-treecreeper",
       "seasons": {
         "spring": ["16:00"],
         "summer": ["16:00"],
@@ -151,8 +151,8 @@
       }
     },
     "spotted-pardalote": {
-      "displayName": "Spotted Pardalote",
-      "folder": "spotted-pardalote",
+      "name": "Spotted Pardalote",
+      "slug": "spotted-pardalote",
       "seasons": {
         "spring": ["17:00"],
         "summer": ["17:00"],
@@ -161,8 +161,8 @@
       }
     },
     "tawny-frogmouth": {
-      "displayName": "Tawny Frogmouth",
-      "folder": "tawny-frogmouth",
+      "name": "Tawny Frogmouth",
+      "slug": "tawny-frogmouth",
       "seasons": {
         "spring": ["18:00"],
         "summer": ["18:30"],
@@ -171,16 +171,16 @@
       }
     },
     "gang-gang-cockatoo": {
-      "displayName": "Gang-gang Cockatoo",
-      "folder": "gang-gang-cockatoo",
+      "name": "Gang-gang Cockatoo",
+      "slug": "gang-gang-cockatoo",
       "seasons": {
         "autumn": ["11:00"],
         "winter": ["11:00"]
       }
     },
     "flame-robin": {
-      "displayName": "Flame Robin",
-      "folder": "flame-robin",
+      "name": "Flame Robin",
+      "slug": "flame-robin",
       "seasons": {
         "winter": ["07:30"]
       }
