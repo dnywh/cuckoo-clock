@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout cuckoo-clock
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: cuckoo-clock
 
       - name: Checkout cuckoo-clock-site
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: dnywh/cuckoo-clock-site
           token: ${{ secrets.PAT_TOKEN }}
@@ -30,7 +30,7 @@ jobs:
       - name: Commit and push if changed
         run: |
           cd cuckoo-clock-site
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name dnywh
+          git config user.email "3104761+dnywh@users.noreply.github.com"
           git add .
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update birds.json"; git push)
