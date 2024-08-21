@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout cuckoo-clock
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: cuckoo-clock
 
       - name: Checkout cuckoo-clock-site
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: dnywh/cuckoo-clock-site
           token: ${{ secrets.PAT_TOKEN }}
