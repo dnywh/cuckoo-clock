@@ -25,7 +25,7 @@ jobs:
 
       - name: Copy JSON file
         run: |
-          cp cuckoo-clock/path/to/your/birds.json cuckoo-clock-site/path/to/destination/birds.json
+          cp cuckoo-clock/bird_data.json cuckoo-clock-site/src/data/bird_data.json
 
       - name: Commit and push if changed
         run: |
