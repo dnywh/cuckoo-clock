@@ -1,0 +1,36 @@
+name: Sync JSON to cuckoo-clock-site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "bird_data.json"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout cuckoo-clock
+        uses: actions/checkout@v2
+        with:
+          path: cuckoo-clock
+
+      - name: Checkout cuckoo-clock-site
+        uses: actions/checkout@v2
+        with:
+          repository: dnywh/cuckoo-clock-site
+          token: ${{ secrets.PAT_TOKEN }}
+          path: cuckoo-clock-site
+
+      - name: Copy JSON file
+        run: |
+          cp cuckoo-clock/path/to/your/birds.json cuckoo-clock-site/path/to/destination/birds.json
+
+      - name: Commit and push if changed
+        run: |
+          cd cuckoo-clock-site
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update birds.json"; git push)
