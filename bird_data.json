@@ -132,7 +132,7 @@
     },
     "willie-wagtail": {
       "name": "Willie Wagtail",
-      "slug": "willie-wagtail",
+      "slug": "willie-wagtail-test",
       "seasons": {
         "spring": ["15:00"],
         "summer": ["15:00"],
