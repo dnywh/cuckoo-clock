@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout cuckoo-clock
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           path: cuckoo-clock
 
       - name: Checkout cuckoo-clock-site
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: dnywh/cuckoo-clock-site
           token: ${{ secrets.PAT_TOKEN }}
@@ -28,10 +28,10 @@ jobs:
         run: |
           cp cuckoo-clock/bird_data.json cuckoo-clock-site/src/data/bird_data.json
 
-      - name: Copy JPG files
+      - name: Sync JPG files
         run: |
           mkdir -p cuckoo-clock-site/public/images
-          find cuckoo-clock/birds -name "*.jpg" -exec cp {} cuckoo-clock-site/public/images/ \;
+          rsync -av --delete cuckoo-clock/birds/*/*.jpg cuckoo-clock-site/public/images/
 
       - name: Commit and push if changed
         run: |
