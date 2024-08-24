@@ -1,6 +1,6 @@
 # Cuckoo Clock Project
 
-See also the [companion site](http://github.com/dnywh/cuckoo-clock-site).
+See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery between the two repositories.
 
 ## Installation
 

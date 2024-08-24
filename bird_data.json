@@ -4,89 +4,92 @@
       "name": "Australian Magpie",
       "slug": "australian-magpie",
       "seasons": {
-        "spring": ["04:30"],
-        "summer": ["04:00"],
+        "spring": ["05:00"],
+        "summer": ["05:00"],
         "autumn": ["05:00"],
-        "winter": ["06:00"]
+        "winter": ["05:00"]
       }
     },
     "laughing-kookaburra": {
       "name": "Laughing Kookaburra",
       "slug": "laughing-kookaburra",
       "seasons": {
-        "spring": ["05:00"],
-        "summer": ["04:30"],
-        "autumn": ["05:30"],
-        "winter": ["06:30"]
+        "spring": ["06:00"],
+        "summer": ["06:00"],
+        "autumn": ["06:00"],
+        "winter": ["06:00"]
       }
     },
     "superb-fairywren": {
       "name": "Superb Fairywren",
       "slug": "superb-fairywren",
       "seasons": {
-        "spring": ["05:30"],
-        "summer": ["05:00"],
-        "autumn": ["06:00"],
-        "winter": ["08:00"]
+        "spring": ["07:00"],
+        "summer": ["07:00"],
+        "autumn": ["07:00"]
       }
     },
     "noisy-friarbird": {
       "name": "Noisy Friarbird",
       "slug": "noisy-friarbird",
       "seasons": {
-        "spring": ["06:00"],
-        "summer": ["05:30"],
-        "autumn": ["06:30"],
-        "winter": ["07:30"]
+        "spring": ["08:00"],
+        "summer": ["08:00"],
+        "autumn": ["08:00"]
       }
     },
     "rainbow-lorikeet": {
       "name": "Rainbow Lorikeet",
       "slug": "rainbow-lorikeet",
       "seasons": {
-        "spring": ["06:30"],
-        "summer": ["06:00"],
-        "autumn": ["07:00"],
-        "winter": ["08:30"]
+        "spring": ["09:00"],
+        "summer": ["09:00"],
+        "autumn": ["09:00"]
       }
     },
     "crimson-rosella": {
       "name": "Crimson Rosella",
       "slug": "crimson-rosella",
       "seasons": {
-        "spring": ["07:00"],
-        "summer": ["07:00"],
-        "autumn": ["08:00"],
+        "spring": ["10:00"],
+        "autumn": ["10:00"],
         "winter": ["07:00"]
+      }
+    },
+    "black-faced-cuckooshrike": {
+      "name": "Black-faced Cuckooshrike",
+      "slug": "black-faced-cuckooshrike",
+      "seasons": {
+        "spring": ["11:00"],
+        "summer": ["10:00"]
       }
     },
     "galah": {
       "name": "Galah",
       "slug": "galah",
       "seasons": {
-        "spring": ["08:00"],
-        "summer": ["08:00"],
-        "autumn": ["09:00"],
-        "winter": ["09:00"]
+        "summer": ["11:00"],
+        "autumn": ["12:00"],
+        "winter": ["10:00"]
       }
     },
     "sulphur-crested-cockatoo": {
       "name": "Sulphur-crested Cockatoo",
       "slug": "sulphur-crested-cockatoo",
       "seasons": {
-        "spring": ["09:00"],
-        "summer": ["09:00"],
-        "autumn": ["10:00"],
-        "winter": ["10:00"]
+        "spring": ["12:00"],
+        "summer": ["12:00"],
+        "autumn": ["13:00"],
+        "winter": ["11:00"]
       }
     },
     "australian-king-parrot": {
       "name": "Australian King Parrot",
       "slug": "australian-king-parrot",
       "seasons": {
-        "spring": ["10:00"],
-        "summer": ["10:00"],
-        "autumn": ["12:00"],
+        "spring": ["13:00"],
+        "summer": ["13:00"],
+        "autumn": ["14:00"],
         "winter": ["12:00"]
       }
     },
@@ -94,9 +97,9 @@
       "name": "Pied Currawong",
       "slug": "pied-currawong",
       "seasons": {
-        "spring": ["11:00"],
-        "summer": ["11:00"],
-        "autumn": ["13:00"],
+        "spring": ["14:00"],
+        "summer": ["14:00"],
+        "autumn": ["15:00"],
         "winter": ["13:00"]
       }
     },
@@ -104,9 +107,9 @@
       "name": "Red Wattlebird",
       "slug": "red-wattlebird",
       "seasons": {
-        "spring": ["12:00"],
-        "summer": ["12:00"],
-        "autumn": ["14:00"],
+        "spring": ["15:00"],
+        "summer": ["15:00"],
+        "autumn": ["16:00"],
         "winter": ["14:00"]
       }
     },
@@ -114,9 +117,9 @@
       "name": "Eastern Spinebill",
       "slug": "eastern-spinebill",
       "seasons": {
-        "spring": ["13:00"],
-        "summer": ["13:00"],
-        "autumn": ["15:00"],
+        "spring": ["16:00"],
+        "summer": ["16:00"],
+        "autumn": ["17:00"],
         "winter": ["15:00"]
       }
     },
@@ -124,28 +127,48 @@
       "name": "Welcome Swallow",
       "slug": "welcome-swallow",
       "seasons": {
-        "spring": ["14:00"],
-        "summer": ["14:00"],
-        "autumn": ["16:00"],
-        "winter": ["16:00"]
+        "spring": ["17:00"],
+        "summer": ["17:00"]
       }
     },
     "willie-wagtail": {
       "name": "Willie Wagtail",
       "slug": "willie-wagtail",
       "seasons": {
-        "spring": ["15:00"],
-        "summer": ["15:00"],
-        "autumn": ["17:00"],
-        "winter": ["15:00"]
+        "spring": ["18:00"],
+        "summer": ["18:00"],
+        "winter": ["18:00"]
+      }
+    },
+    "tawny-frogmouth": {
+      "name": "Tawny Frogmouth",
+      "slug": "tawny-frogmouth",
+      "seasons": {
+        "spring": ["19:00"],
+        "summer": ["19:00"],
+        "autumn": ["19:00"],
+        "winter": ["19:00"]
+      }
+    },
+    "gang-gang-cockatoo": {
+      "name": "Gang-gang Cockatoo",
+      "slug": "gang-gang-cockatoo",
+      "seasons": {
+        "autumn": ["11:00"],
+        "winter": ["09:00"]
+      }
+    },
+    "flame-robin": {
+      "name": "Flame Robin",
+      "slug": "flame-robin",
+      "seasons": {
+        "winter": ["08:00"]
       }
     },
     "white-throated-treecreeper": {
       "name": "White-throated Treecreeper",
       "slug": "white-throated-treecreeper",
       "seasons": {
-        "spring": ["16:00"],
-        "summer": ["16:00"],
         "autumn": ["18:00"],
         "winter": ["16:00"]
       }
@@ -154,35 +177,7 @@
       "name": "Spotted Pardalote",
       "slug": "spotted-pardalote",
       "seasons": {
-        "spring": ["17:00"],
-        "summer": ["17:00"],
-        "autumn": ["16:00"],
         "winter": ["17:00"]
-      }
-    },
-    "tawny-frogmouth": {
-      "name": "Tawny Frogmouth",
-      "slug": "tawny-frogmouth",
-      "seasons": {
-        "spring": ["18:00"],
-        "summer": ["18:30"],
-        "autumn": ["19:00"],
-        "winter": ["18:00"]
-      }
-    },
-    "gang-gang-cockatoo": {
-      "name": "Gang-gang Cockatoo",
-      "slug": "gang-gang-cockatoo",
-      "seasons": {
-        "autumn": ["11:00"],
-        "winter": ["11:00"]
-      }
-    },
-    "flame-robin": {
-      "name": "Flame Robin",
-      "slug": "flame-robin",
-      "seasons": {
-        "winter": ["07:30"]
       }
     }
   },
@@ -193,9 +188,9 @@
     "winter": { "months": [6, 7, 8] }
   },
   "quietHours": {
-    "spring": { "start": "19:00", "end": "04:30" },
-    "summer": { "start": "19:00", "end": "04:00" },
+    "spring": { "start": "20:00", "end": "05:00" },
+    "summer": { "start": "20:00", "end": "05:00" },
     "autumn": { "start": "20:00", "end": "05:00" },
-    "winter": { "start": "19:00", "end": "06:00" }
+    "winter": { "start": "20:00", "end": "05:00" }
   }
 }
