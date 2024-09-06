@@ -3,6 +3,7 @@
     "australian-magpie": {
       "name": "Australian Magpie",
       "slug": "australian-magpie",
+      "latin": "Gymnorhina tibicen",
       "seasons": {
         "spring": ["05:00"],
         "summer": ["05:00"],
@@ -13,6 +14,7 @@
     "laughing-kookaburra": {
       "name": "Laughing Kookaburra",
       "slug": "laughing-kookaburra",
+      "latin": "Dacelo novaeguineae",
       "seasons": {
         "spring": ["06:00"],
         "summer": ["06:00"],
@@ -23,6 +25,7 @@
     "superb-fairywren": {
       "name": "Superb Fairywren",
       "slug": "superb-fairywren",
+      "latin": "Malurus cyaneus",
       "seasons": {
         "spring": ["07:00"],
         "summer": ["07:00"],
@@ -32,6 +35,7 @@
     "noisy-friarbird": {
       "name": "Noisy Friarbird",
       "slug": "noisy-friarbird",
+      "latin": "Philemon corniculatus",
       "seasons": {
         "spring": ["08:00"],
         "summer": ["08:00"],
@@ -41,6 +45,7 @@
     "rainbow-lorikeet": {
       "name": "Rainbow Lorikeet",
       "slug": "rainbow-lorikeet",
+      "latin": "Trichoglossus moluccanus",
       "seasons": {
         "spring": ["09:00"],
         "summer": ["09:00"],
@@ -50,6 +55,7 @@
     "crimson-rosella": {
       "name": "Crimson Rosella",
       "slug": "crimson-rosella",
+      "latin": "Platycercus elegans",
       "seasons": {
         "spring": ["10:00"],
         "autumn": ["10:00"],
@@ -59,6 +65,7 @@
     "black-faced-cuckooshrike": {
       "name": "Black-faced Cuckooshrike",
       "slug": "black-faced-cuckooshrike",
+      "latin": "Coracina novaehollandiae",
       "seasons": {
         "spring": ["11:00"],
         "summer": ["10:00"]
@@ -67,6 +74,7 @@
     "galah": {
       "name": "Galah",
       "slug": "galah",
+      "latin": "Eolophus roseicapilla",
       "seasons": {
         "summer": ["11:00"],
         "autumn": ["12:00"],
@@ -76,6 +84,7 @@
     "sulphur-crested-cockatoo": {
       "name": "Sulphur-crested Cockatoo",
       "slug": "sulphur-crested-cockatoo",
+      "latin": "Cacatua galerita",
       "seasons": {
         "spring": ["12:00"],
         "summer": ["12:00"],
@@ -86,6 +95,7 @@
     "australian-king-parrot": {
       "name": "Australian King Parrot",
       "slug": "australian-king-parrot",
+      "latin": "Alisterus scapularis",
       "seasons": {
         "spring": ["13:00"],
         "summer": ["13:00"],
@@ -96,6 +106,7 @@
     "pied-currawong": {
       "name": "Pied Currawong",
       "slug": "pied-currawong",
+      "latin": "Strepera graculina",
       "seasons": {
         "spring": ["14:00"],
         "summer": ["14:00"],
@@ -106,6 +117,7 @@
     "red-wattlebird": {
       "name": "Red Wattlebird",
       "slug": "red-wattlebird",
+      "latin": "Anthochaera carunculata",
       "seasons": {
         "spring": ["15:00"],
         "summer": ["15:00"],
@@ -116,6 +128,7 @@
     "eastern-spinebill": {
       "name": "Eastern Spinebill",
       "slug": "eastern-spinebill",
+      "latin": "Acanthorhynchus tenuirostris",
       "seasons": {
         "spring": ["16:00"],
         "summer": ["16:00"],
@@ -126,6 +139,7 @@
     "welcome-swallow": {
       "name": "Welcome Swallow",
       "slug": "welcome-swallow",
+      "latin": "Hirundo neoxena",
       "seasons": {
         "spring": ["17:00"],
         "summer": ["17:00"]
@@ -134,6 +148,7 @@
     "willie-wagtail": {
       "name": "Willie Wagtail",
       "slug": "willie-wagtail",
+      "latin": "Rhipidura leucophrys",
       "seasons": {
         "spring": ["18:00"],
         "summer": ["18:00"],
@@ -143,6 +158,7 @@
     "tawny-frogmouth": {
       "name": "Tawny Frogmouth",
       "slug": "tawny-frogmouth",
+      "latin": "Podargus strigoides",
       "seasons": {
         "spring": ["19:00"],
         "summer": ["19:00"],
@@ -153,6 +169,7 @@
     "gang-gang-cockatoo": {
       "name": "Gang-gang Cockatoo",
       "slug": "gang-gang-cockatoo",
+      "latin": "Callocephalon fimbriatum",
       "seasons": {
         "autumn": ["11:00"],
         "winter": ["09:00"]
@@ -161,6 +178,7 @@
     "flame-robin": {
       "name": "Flame Robin",
       "slug": "flame-robin",
+      "latin": "Petroica phoenicea",
       "seasons": {
         "winter": ["08:00"]
       }
@@ -168,6 +186,7 @@
     "white-throated-treecreeper": {
       "name": "White-throated Treecreeper",
       "slug": "white-throated-treecreeper",
+      "latin": "Cormobates leucophaea",
       "seasons": {
         "autumn": ["18:00"],
         "winter": ["16:00"]
@@ -176,6 +195,7 @@
     "spotted-pardalote": {
       "name": "Spotted Pardalote",
       "slug": "spotted-pardalote",
+      "latin": "Pardalotus punctatus",
       "seasons": {
         "winter": ["17:00"]
       }
