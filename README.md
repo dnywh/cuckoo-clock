@@ -4,6 +4,56 @@ See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [Git
 
 ## Features
 
+### Inky's library
+
+Follow Pimoroni's instructions for setting up your Inky display. The steps can be boiled down to:
+
+```bash
+python3 -m venv --system-site-packages $HOME/.virtualenvs/pimoroni
+source ~/.virtualenvs/pimoroni/bin/activate
+pip install inky
+```
+
+You may also need to manually enable i2c and spi on your Rapsberry Pi.
+
+Try running their example files before continuing.
+
+### Schedule
+
+You can (and should) set Cuckoo Clock up on a regular schedule via CRON. See the [crontab.example](TODO) and [launcher.sh](launcher.sh) file for what it might look like. Note that the CRON job(s) I've set up will automatically create logs for debugging.
+
+First, create the logs directory (required for CRON logging):
+
+```bash
+mkdir -p /home/pi/logs
+```
+
+Then make the launcher executable:
+
+```bash
+chmod +x /home/pi/cuckoo-clock/launcher.sh
+```
+
+Then set up the CRON schedule:
+
+```bash
+crontab -e
+```
+
+Paste in the contents from _crontab.example_ as a starting point.
+
+You can test if the above works by running the following:
+
+```bash
+/home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
+```
+
+See my [Pi Frame](https://github.com/dnywh/pi-frame?tab=readme-ov-file#scheduling) write up for more about scheduling.
+
+#### Dynamic scheduling
+
+This is out of scope. But if you ever change your quiet hours, you'll need to also update your CRON schedule. There are ways to do this dynamically via a .sh file that syncs those quiet hours. You'll need to set that up yourself as I feel it adds too much complexity to the project.
+
 ### Bird checks
 
 After looking up which bird is currently active, Cuckoo Clock will check to see if that bird happens to already be rendered to the e-ink display. If it is, it'll skip the update. This helps unnecessary screen re-renders, which is especially important here given the short lifespan of e-ink displays.
@@ -22,7 +72,20 @@ I've set up `display_state.json` ahead of time to show you how this is structure
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/cuckoo-clock.git
+   git clone https://github.com/dnywh/cuckoo-clock.git
+   cd cuckoo-clock
+   ```
+
+2. Set up your virtual environment and install the required packages
+
+3. Upload the entire repo to your Pi
+
+### Setting up the environment (old)
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/dnywh/cuckoo-clock.git
    cd cuckoo-clock
    ```
 

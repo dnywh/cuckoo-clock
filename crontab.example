@@ -1,0 +1,5 @@
+# Run Cuckoo Clock if the Raspberry Pi is rebooted
+@reboot /home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
+
+# Run Cuckoo Clock at minute 0 past every hour from 5am through to 8pm:
+0 05-20 * * * /home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
