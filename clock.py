@@ -1,218 +1,126 @@
+from PIL import Image
+from inky.auto import auto
+
 import json
-import random
-import time
-import os
-from datetime import datetime, timedelta
-from PIL import Image  # Images, at least on macOS
-import pygame  # Audio playback
+from datetime import datetime, time
 
-# Conditional imports and setup
-try:
-    import RPi.GPIO as GPIO
-
-    ON_RASPBERRY_PI = True
-    # GPIO setup for buttons (only on Raspberry Pi)
-    GPIO.setmode(GPIO.BCM)
-    NEXT_BUTTON = 17
-    PREV_BUTTON = 27
-    SOUND_BUTTON = 22
-    GPIO.setup(NEXT_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(PREV_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(SOUND_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-except ImportError:
-    ON_RASPBERRY_PI = False
-    print("Running in development mode (not on Raspberry Pi)")
-
-# Initialize pygame mixer for audio
-pygame.mixer.init()
 
 # Load the shared bird data
-with open("bird_data.json", "r") as f:
+with open("bird-data.json", "r") as f:
     bird_data = json.load(f)
 
-# Base path for the birds folder
-BIRDS_FOLDER = "birds"
 
-
-def load_image(bird_key):
-    slug = bird_data["birds"][bird_key]["slug"]
-    image_path = os.path.join(BIRDS_FOLDER, slug, f"{slug}.jpg")
-    try:
-        return Image.open(image_path)
-    except FileNotFoundError:
-        print(f"Image not found for {bird_data['birds'][bird_key]['name']}")
-        return None
-
-
-def play_random_sound(bird_key):
-    slug = bird_data["birds"][bird_key]["slug"]
-    sound_folder = os.path.join(BIRDS_FOLDER, slug)
-    sound_files = [f for f in os.listdir(sound_folder) if f.endswith(".mp3")]
-    if sound_files:
-        chosen_sound = random.choice(sound_files)
-        sound_path = os.path.join(sound_folder, chosen_sound)
-        try:
-            pygame.mixer.music.load(sound_path)
-            pygame.mixer.music.play()
-            print(f"Playing {chosen_sound} for {bird_data['birds'][bird_key]['name']}")
-        except pygame.error as e:
-            print(
-                f"Error playing sound for {bird_data['birds'][bird_key]['name']}: {e}"
-            )
-    else:
-        print(f"No sound files found for {bird_data['birds'][bird_key]['name']}")
-
-
-def display_image(bird_key):
-    image = load_image(bird_key)
-    if image:
-        if ON_RASPBERRY_PI:
-            # Here you would send the image to your e-ink display
-            # For example: display_eink(image)
-            print(
-                f"Displaying image for {bird_data['birds'][bird_key]['name']} on e-ink display"
-            )
-        else:
-            # For development on Mac, just show the image using PIL
-            image.show()
-        print(f"Displaying image for {bird_data['birds'][bird_key]['name']}")
-    else:
-        print(f"Failed to display image for {bird_data['birds'][bird_key]['name']}")
+def parse_time(time_str):
+    """Convert time string (HH:MM) to datetime.time object for comparison"""
+    return datetime.strptime(time_str, "%H:%M").time()
 
 
 def get_current_bird(current_datetime):
     current_month = current_datetime.month
     current_time = current_datetime.strftime("%H:%M")
+    current_time_obj = parse_time(current_time)
 
-    # Determine current season
-    current_season = next(
-        season
-        for season, data in bird_data["seasons"].items()
-        if current_month in data["months"]
-    )
+    print(f"Current time: {current_time}")
+    print(f"Current month: {current_month}")
 
     # Check if it's quiet hours
-    quiet_hours = bird_data["quietHours"][current_season]
-    if quiet_hours["start"] <= current_time or current_time < quiet_hours["end"]:
-        return "quiet-hours", current_season
+    quiet_hours = bird_data["quietHours"]
+    quiet_start = parse_time(quiet_hours["start"])
+    quiet_end = parse_time(quiet_hours["end"])
 
-    # Find the most recent bird for the current time
-    scheduled_birds = {
-        time: bird
-        for bird, info in bird_data["birds"].items()
-        for time in info["seasons"].get(current_season, [])
-    }
-    if not scheduled_birds:
-        return "no-birds-scheduled", current_season
-
-    most_recent_time = max(
-        [time for time in scheduled_birds.keys() if time <= current_time]
-    )
-    current_bird = scheduled_birds[most_recent_time]
-
-    return current_bird, current_season
-
-
-def main():
-    print("Bird Sound and Display Clock")
-    if ON_RASPBERRY_PI:
-        print("Press the 'Next' button to manually change to the next hour")
-        print("Press the 'Prev' button to manually change to the previous hour")
-        print("Press the 'Sound' button to play the current bird's sound")
+    # Handle quiet hours that span midnight (e.g., 20:00 to 05:00)
+    if quiet_start > quiet_end:
+        if current_time_obj >= quiet_start or current_time_obj < quiet_end:
+            print("It's quiet hours!")
+            return "quiet-hours", current_time
     else:
-        print("Press 'n' to manually change to the next hour")
-        print("Press 'p' to manually change to the previous hour")
-        print("Press 's' to play the current bird's sound")
-        print("Press 'q' to quit")
+        if quiet_start <= current_time_obj < quiet_end:
+            print("It's quiet hours!")
+            return "quiet-hours", current_time
 
-    simulated_datetime = datetime.now()
-    current_bird, current_season = get_current_bird(simulated_datetime)
-    if current_bird != "quiet-hours" and current_bird != "no-birds-scheduled":
-        display_image(current_bird)
-    print(f"Current time: {simulated_datetime.strftime('%H:%M')} in {current_season}")
-    print(
-        f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
-    )
+    # Get the birds for the current month
+    month_birds = bird_data["months"][str(current_month)]
 
-    def handle_input(input_key):
-        nonlocal simulated_datetime, current_bird, current_season
-        if input_key in ["n", "next"]:
-            simulated_datetime += timedelta(hours=1)
-        elif input_key in ["p", "prev"]:
-            simulated_datetime -= timedelta(hours=1)
+    # Find the bird whose time matches or is closest to the current time
+    current_bird = None
+    for bird_info in month_birds:
+        bird_time = parse_time(bird_info["time"])
+        if bird_time <= current_time_obj:
+            current_bird = bird_info["bird"]
+            print(f"Found bird for time {bird_info['time']}: {current_bird}")
 
-        new_bird, new_season = get_current_bird(simulated_datetime)
-        if new_bird != current_bird or new_season != current_season:
-            current_bird = new_bird
-            current_season = new_season
-            if current_bird != "quiet-hours" and current_bird != "no-birds-scheduled":
-                display_image(current_bird)
-            print(
-                f"Current time: {simulated_datetime.strftime('%H:%M')} - {current_season}"
-            )
-            print(
-                f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
-            )
+    # If no bird found (current time is before first bird's time), use the last bird of the day
+    if not current_bird:
+        current_bird = month_birds[-1]["bird"]
+        print(f"Using last bird of the day: {current_bird}")
 
-        if input_key in ["s", "sound"]:
-            if current_bird != "quiet-hours" and current_bird != "no-birds-scheduled":
-                play_random_sound(current_bird)
-
-    if ON_RASPBERRY_PI:
-
-        def button_callback(channel):
-            if channel == NEXT_BUTTON:
-                handle_input("next")
-            elif channel == PREV_BUTTON:
-                handle_input("prev")
-            elif channel == SOUND_BUTTON:
-                handle_input("sound")
-
-        GPIO.add_event_detect(
-            NEXT_BUTTON, GPIO.FALLING, callback=button_callback, bouncetime=300
-        )
-        GPIO.add_event_detect(
-            PREV_BUTTON, GPIO.FALLING, callback=button_callback, bouncetime=300
-        )
-        GPIO.add_event_detect(
-            SOUND_BUTTON, GPIO.FALLING, callback=button_callback, bouncetime=300
-        )
-
-    try:
-        while True:
-            if not ON_RASPBERRY_PI:
-                user_input = input("Enter command (n/p/s/q): ").lower()
-                if user_input == "q":
-                    break
-                handle_input(user_input)
-
-            if ON_RASPBERRY_PI:
-                # On Raspberry Pi, we update the simulated time to match the real time
-                simulated_datetime = datetime.now()
-                new_bird, new_season = get_current_bird(simulated_datetime)
-                if new_bird != current_bird or new_season != current_season:
-                    current_bird = new_bird
-                    current_season = new_season
-                    if (
-                        current_bird != "quiet-hours"
-                        and current_bird != "no-birds-scheduled"
-                    ):
-                        display_image(current_bird)
-                    print(
-                        f"Current time: {simulated_datetime.strftime('%H:%M')} - {current_season}"
-                    )
-                    print(
-                        f"Current bird: {bird_data['birds'][current_bird]['name'] if current_bird in bird_data['birds'] else current_bird}"
-                    )
-                time.sleep(30)  # Check every 30 seconds on Raspberry Pi
-            else:
-                time.sleep(1)  # Check every second in development mode
-    except KeyboardInterrupt:
-        print("Program interrupted by user")
-    finally:
-        if ON_RASPBERRY_PI:
-            GPIO.cleanup()  # Clean up GPIO on program exit
+    return current_bird
 
 
+inky = auto(ask_user=True, verbose=True)
+
+
+def prepare_image(image_path, target_width, target_height):
+    # TODO: Clear display before wiping first?
+    # Open the image
+    image = Image.open(image_path)
+
+    # Rotate image 90° anticlockwise for portrait orientation
+    image = image.rotate(90, expand=True)
+
+    # Calculate aspect ratios
+    img_ratio = image.width / image.height
+    target_ratio = target_width / target_height
+
+    if img_ratio > target_ratio:
+        # Image is wider than the target ratio
+        new_width = target_width
+        new_height = int(target_width / img_ratio)
+    else:
+        # Image is taller than the target ratio
+        new_height = target_height
+        new_width = int(target_height * img_ratio)
+
+    # Resize image maintaining aspect ratio
+    resized = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+    # Create a new white background image of target size
+    final = Image.new("RGB", (target_width, target_height), "white")
+
+    # Calculate position to paste resized image (centering it)
+    paste_x = (target_width - new_width) // 2
+    paste_y = (target_height - new_height) // 2
+
+    # Paste the resized image onto the white background
+    final.paste(resized, (paste_x, paste_y))
+
+    return final
+
+
+# Get the display dimensions
+display_width, display_height = inky.resolution
+
+# Prepare the image
+saturation = 0.5
+
+
+# Run
 if __name__ == "__main__":
-    main()
+    try:
+        current_datetime = datetime.now()
+        result = get_current_bird(current_datetime)
+        print(f"Final result: {result}")
+
+        # TODO: if the result bird is the same as what's currently rendered, don't update
+
+        full_image_url = f"birds/{result}/{result}.jpg"
+        processed_image = prepare_image(full_image_url, display_width, display_height)
+        print(f"Displaying {result} on e-ink display")
+
+        inky.set_image(processed_image, saturation=saturation)
+    # TODO: Do we need this? See what Inky does on their example files
+    # except TypeError:
+    #     inky.set_image(processed_image)
+    except Exception as e:
+        print(f"Error: {e}")
+    inky.show()
