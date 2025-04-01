@@ -2,6 +2,14 @@
 
 See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery between the two repositories.
 
+## Features
+
+### Bird checks
+
+After looking up which bird is currently active, Cuckoo Clock will check to see if that bird happens to already be rendered to the e-ink display. If it is, it'll skip the update. This helps unnecessary screen re-renders, which is especially important here given the short lifespan of e-ink displays.
+
+I've set up `display_state.json` ahead of time to show you how this is structured. It assumes the `red-wattlebird` is currently active. Simply delete this file if you want to start afresh. Otherwise it will quietly be overriden as the clock goes through various birds.
+
 ## Installation
 
 ### Prerequisites
@@ -31,20 +39,13 @@ See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [Git
    pip install Pillow pygame
    ```
 
-   Note: If you're setting up on a Raspberry Pi, you'll also need to install RPi.GPIO:
-
-   ```
-   pip install RPi.GPIO
-   ```
-
 ### Additional Setup for Raspberry Pi
 
 If you're setting up on a Raspberry Pi, make sure you have the necessary hardware:
 
-- E-ink display (specifics depend on your chosen model)
-- Buttons connected to GPIO pins (as specified in the script)
+- E-ink display (Pimoroni Inky Impression)
 
-You may need to install additional libraries specific to your e-ink display. Refer to the display manufacturer's documentation for details.
+I'm using a Pimoroni Inky Impression. You'll need to adapt the code to match your own e-ink display, if it differs.
 
 The CRON schedule should match the quiet hours for each of the four seasons set out in [birds.json](birds.json).
 
@@ -59,14 +60,3 @@ The CRON schedule should match the quiet hours for each of the four seasons set 
    ```
    python clock.py
    ```
-
-   - On Mac or non-Raspberry Pi systems, you can interact with the program using keyboard inputs:
-
-     - 'n': Move to the next hour
-     - 'p': Move to the previous hour
-     - 's': Play the current bird's sound
-     - 'q': Quit the program
-
-   - On Raspberry Pi, the script will use GPIO buttons for interaction (once hardware is set up).
-
-Note: The script automatically detects whether it's running on a Raspberry Pi or another system and adjusts its behavior accordingly.

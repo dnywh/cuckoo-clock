@@ -3,11 +3,36 @@ from inky.auto import auto
 
 import json
 from datetime import datetime, time
+import os
 
 
 # Load the shared bird data
-with open("bird-data.json", "r") as f:
+with open("bird_data.json", "r") as f:
     bird_data = json.load(f)
+
+# State file for tracking last displayed bird
+STATE_FILE = "display_state.json"
+
+
+def load_last_displayed_bird():
+    """Load the last displayed bird from state file"""
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, "r") as f:
+                state = json.load(f)
+                return state.get("last_bird")
+        except Exception as e:
+            print(f"Error loading state file: {e}")
+    return None
+
+
+def save_last_displayed_bird(bird):
+    """Save the currently displayed bird to state file"""
+    try:
+        with open(STATE_FILE, "w") as f:
+            json.dump({"last_bird": bird}, f)
+    except Exception as e:
+        print(f"Error saving state file: {e}")
 
 
 def parse_time(time_str):
@@ -111,16 +136,18 @@ if __name__ == "__main__":
         result = get_current_bird(current_datetime)
         print(f"Final result: {result}")
 
-        # TODO: if the result bird is the same as what's currently rendered, don't update
+        # Check if the bird is already displayed
+        last_bird = load_last_displayed_bird()
+        if last_bird == result:
+            print(f"Bird {result} is already displayed, skipping update")
+            exit(0)
 
         full_image_url = f"birds/{result}/{result}.jpg"
         processed_image = prepare_image(full_image_url, display_width, display_height)
         print(f"Displaying {result} on e-ink display")
 
         inky.set_image(processed_image, saturation=saturation)
-    # TODO: Do we need this? See what Inky does on their example files
-    # except TypeError:
-    #     inky.set_image(processed_image)
+        save_last_displayed_bird(result)
     except Exception as e:
         print(f"Error: {e}")
     inky.show()
