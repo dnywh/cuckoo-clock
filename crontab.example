@@ -1,5 +1,10 @@
 # Run Cuckoo Clock if the Raspberry Pi is rebooted
-@reboot /home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
+@reboot /home/pi/cuckoo-clock/clock_runner.sh >>/home/pi/logs/cronlog.log 2>&1
 
-# Run Cuckoo Clock at minute 0 past every hour from 5am through to 8pm:
-0 05-20 * * * /home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
+# Run Cuckoo Clock at minute 0 past every hour from 5am (quiet hours end) through to and including 8pm:
+0 05-20 * * * /home/pi/cuckoo-clock/clock_runner.sh >>/home/pi/logs/cronlog.log 2>&1
+
+# Run the clear script at 9pm (quiet hours start) every day to prevent ghosting before quiet hours
+0 21 * * * /home/pi/cuckoo-clock/clear_runner.sh >>/home/pi/logs/clear.log 2>&1
+
+## Use two carets (>>) instead of the one (>) if you want to append to the log rather than re-writing it each time

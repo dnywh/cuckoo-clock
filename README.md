@@ -20,23 +20,20 @@ Try running their example files before continuing.
 
 ### Schedule
 
-You can (and should) set Cuckoo Clock up on a regular schedule via CRON. See the [crontab.example](TODO) and [launcher.sh](launcher.sh) file for what it might look like. Note that the CRON job(s) I've set up will automatically create logs for debugging.
+You can (and should) set Cuckoo Clock up on a regular schedule via CRON. See the \_[crontab.example](https://github.com/dnywh/cuckoo-clock/blob/main/crontab.example) and [clock_runner.sh](https://github.com/dnywh/cuckoo-clock/blob/main/clock_runner.sh) file for what it might look like. Note that the CRON job(s) I've set up will automatically create logs for debugging.
 
 First, create the logs directory (required for CRON logging):
 
 ```bash
 mkdir -p /home/pi/logs
-```
 
-Then make the launcher executable:
+# Set permissions for logs directory
+chmod 755 /home/pi/logs
 
-```bash
-chmod +x /home/pi/cuckoo-clock/launcher.sh
-```
+# Make the runner executable
+chmod +x /home/pi/cuckoo-clock/clock_runner.sh
 
-Then set up the CRON schedule:
-
-```bash
+# Set up the CRON schedule
 crontab -e
 ```
 
@@ -45,10 +42,21 @@ Paste in the contents from _crontab.example_ as a starting point.
 You can test if the above works by running the following:
 
 ```bash
-/home/pi/cuckoo-clock/launcher.sh >/home/pi/logs/cronlog.log 2>&1
+/home/pi/cuckoo-clock/clock_runner.sh >/home/pi/logs/cronlog.log 2>&1
 ```
 
 See my [Pi Frame](https://github.com/dnywh/pi-frame?tab=readme-ov-file#scheduling) write up for more about scheduling.
+
+#### Display maintenance
+
+To prevent ghosting on the e-ink display, the `clear.py` script runs at the beginning of quiet hours (9pm) every day. This ensures the display gets a fresh refresh cycle before entering its overnight rest period. The script logs its output to `/home/pi/logs/clear.log` for debugging purposes.
+
+Make sure both runner scripts are executable:
+
+```bash
+chmod +x /home/pi/cuckoo-clock/clock_runner.sh
+chmod +x /home/pi/cuckoo-clock/clear_runner.sh
+```
 
 #### Dynamic scheduling
 

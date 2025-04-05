@@ -90,8 +90,8 @@ def prepare_image(image_path, target_width, target_height):
     # Open the image
     image = Image.open(image_path)
 
-    # Rotate image 90° anticlockwise for portrait orientation
-    image = image.rotate(90, expand=True)
+    # Rotate image 90° for portrait orientation
+    image = image.rotate(270, expand=True)
 
     # Calculate aspect ratios
     img_ratio = image.width / image.height
