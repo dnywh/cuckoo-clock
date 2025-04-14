@@ -1,4 +1,6 @@
-# Cuckoo Clock Project
+# Cuckoo Clock
+
+`clock.py` changes the bird via a CRON schedule. `button.py` plays a sound for the current bird whenever the button is pressed. `clear.py`. nicely wipes the e-ink display before sleep.
 
 See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery between the two repositories.
 
@@ -62,6 +64,35 @@ chmod +x /home/pi/cuckoo-clock/clear_runner.sh
 
 This is out of scope. But if you ever change your quiet hours, you'll need to also update your CRON schedule. There are ways to do this dynamically via a .sh file that syncs those quiet hours. You'll need to set that up yourself as I feel it adds too much complexity to the project.
 
+### Button controls
+
+The clock supports physical button interaction to play bird sounds. This runs as a separate continuous process, started automatically on boot via CRON.
+
+To set up the button handler:
+
+1. Make the button runner executable:
+
+   ```bash
+   chmod +x /home/pi/cuckoo-clock/button_runner.sh
+   ```
+
+2. Install pygame for sound playback:
+
+   ```bash
+   source ~/.virtualenvs/pimoroni/bin/activate
+   pip install pygame
+   ```
+
+3. Test the button handler:
+
+   ```bash
+   /home/pi/cuckoo-clock/button_runner.sh
+   ```
+
+The button handler will automatically start on boot and log to `/home/pi/logs/button.log`.
+
+Currently, only the first button (A) is active and will play the sound of the currently displayed bird when pressed.
+
 ### Bird checks
 
 After looking up which bird is currently active, Cuckoo Clock will check to see if that bird happens to already be rendered to the e-ink display. If it is, it'll skip the update. This helps unnecessary screen re-renders, which is especially important here given the short lifespan of e-ink displays.
@@ -88,7 +119,7 @@ I've set up `display_state.json` ahead of time to show you how this is structure
 
 3. Upload the entire repo to your Pi
 
-### Setting up the environment (old)
+### Setting up the environment
 
 1. Clone the repository:
 
@@ -97,7 +128,7 @@ I've set up `display_state.json` ahead of time to show you how this is structure
    cd cuckoo-clock
    ```
 
-2. (Optional) Create and activate a virtual environment:
+2. Create and activate a virtual environment:
 
    ```
    python3 -m venv venv
@@ -110,7 +141,7 @@ I've set up `display_state.json` ahead of time to show you how this is structure
    pip install Pillow pygame
    ```
 
-### Additional Setup for Raspberry Pi
+### Additional setup for Raspberry Pi
 
 If you're setting up on a Raspberry Pi, make sure you have the necessary hardware:
 
@@ -120,7 +151,7 @@ I'm using a Pimoroni Inky Impression. You'll need to adapt the code to match you
 
 The CRON schedule should match the quiet hours for each of the four seasons set out in [birds.json](birds.json).
 
-### Running the Project
+### Running the project
 
 1. Ensure you have the `birds_data.json` file in the project directory.
 
@@ -129,5 +160,6 @@ The CRON schedule should match the quiet hours for each of the four seasons set 
 3. Run the script:
 
    ```
+   source ~/.virtualenvs/pimoroni/bin/activate
    python clock.py
    ```

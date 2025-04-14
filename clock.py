@@ -1,10 +1,8 @@
-from PIL import Image
 from inky.auto import auto
-
+from PIL import Image
 import json
 from datetime import datetime, time
 import os
-
 
 # Load the shared bird data
 with open("bird_data.json", "r") as f:

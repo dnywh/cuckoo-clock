@@ -1,6 +1,9 @@
 # Run Cuckoo Clock if the Raspberry Pi is rebooted
 @reboot /home/pi/cuckoo-clock/clock_runner.sh >>/home/pi/logs/cronlog.log 2>&1
 
+# Start the button handler on reboot
+@reboot /home/pi/cuckoo-clock/button_runner.sh >>/home/pi/logs/button.log 2>&1
+
 # Run Cuckoo Clock at minute 0 past every hour from 5am (quiet hours end) through to and including 8pm:
 0 05-20 * * * /home/pi/cuckoo-clock/clock_runner.sh >>/home/pi/logs/cronlog.log 2>&1
 
