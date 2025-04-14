@@ -6,6 +6,10 @@ See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [Git
 
 ## Features
 
+### Simulator
+
+Use the simulator.py file on your Mac or PC to test out image renders before investing in or setting up an e-ink display and Raspberry Pi.
+
 ### Inky's library
 
 Follow Pimoroni's instructions for setting up your Inky display. The steps can be boiled down to:
