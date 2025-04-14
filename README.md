@@ -2,7 +2,7 @@
 
 `clock.py` changes the bird via a CRON schedule. `button.py` plays a sound for the current bird whenever the button is pressed. `clear.py`. nicely wipes the e-ink display before sleep.
 
-See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery between the two repositories.
+See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery from this repository to that one.
 
 ## Features
 

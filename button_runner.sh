@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Wait for the audio device to be ready
+sleep 20
+
 # Activate the Pimoroni virtual environment
 source /home/pi/.virtualenvs/pimoroni/bin/activate
 
