@@ -113,7 +113,7 @@ To set up the button handler:
    /home/pi/cuckoo-clock/button_runner.sh
    ```
 
-Hopefully, after pressing your button, you can hear a bird chirp!
+Give it a minute to print that it’s ready. Then, after pressing your button, you should hear a bird chirp!
 
 The button handler will automatically start on boot and log to `/home/pi/logs/button.log`. The `button.py` file assumes you’re using GPIO pin 5. If you want to use the built-in Inky button(s), check out the `simulator/inky_buttons.py` file.
 

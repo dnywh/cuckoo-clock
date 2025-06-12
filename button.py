@@ -7,6 +7,8 @@ import RPi.GPIO as GPIO
 import pygame as pg
 import time
 
+# from datetime import datetime
+
 print("button.py - Plays a sound when button is pressed.")
 
 # Setup
@@ -65,16 +67,37 @@ def fade_in():
         time.sleep(FADE_DURATION / (FADE_STEPS * 1000))  # Convert ms to seconds
 
 
+def get_random_sound(bird_dir):
+    """Get a random sound that's different from the last one played"""
+    global last_played
+    sound_files = [f for f in os.listdir(bird_dir) if f.endswith(".mp3")]
+    if not sound_files:
+        return None
+
+    # Filter out the last played sound if there are other options
+    available_sounds = [s for s in sound_files if s != last_played]
+    if not available_sounds:  # If all sounds were the same, use the full list
+        available_sounds = sound_files
+
+    selected = random.choice(available_sounds)
+    last_played = selected
+    return selected
+
+
 def play_bird_sound(bird_name):
     print(f"Getting sound for {bird_name}")
     try:
         bird_dir = f"birds/{bird_name}"
-        sound_files = [f for f in os.listdir(bird_dir) if f.endswith(".mp3")]
-        if not sound_files:
+        if not os.path.exists(bird_dir):
+            print(f"Bird directory not found: {bird_dir}")
+            return False
+
+        selected_sound = get_random_sound(bird_dir)
+        if not selected_sound:
             print(f"No sound files found for {bird_name}")
             return False
 
-        sound_path = os.path.join(bird_dir, random.choice(sound_files))
+        sound_path = os.path.join(bird_dir, selected_sound)
         print(f"Playing sound: {sound_path}")
 
         # Start with volume at 0
@@ -94,6 +117,7 @@ def play_bird_sound(bird_name):
                 return True  # Return True to indicate we should play a new sound
             time.sleep(0.1)
 
+        print(f"Sound finished playing")
         return False
     except Exception as e:
         print(f"Error playing sound: {e}")
@@ -103,6 +127,12 @@ def play_bird_sound(bird_name):
 def handle_button(pin):
     if pin == BUTTON_GPIO_PIN:
         current_bird = get_current_bird()
+        if current_bird == "quiet-hours":
+            print(
+                "It’s quiet hours. There isn’t a bird displayed, so no sound will play. Go to bed!"
+            )
+            return
+
         if current_bird:
             print(f"Button pressed at: {time.strftime('%H:%M:%S')}")
             should_play_new = play_bird_sound(current_bird)

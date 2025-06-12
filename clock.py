@@ -55,7 +55,10 @@ def get_current_bird(current_datetime):
     if quiet_start > quiet_end:
         if current_time_obj >= quiet_start or current_time_obj < quiet_end:
             print("It's quiet hours!")
-            return "quiet-hours", current_time
+            return (
+                "quiet-hours",
+                current_time,
+            )  # This `quiet-hours` value is checked in button.py
     else:
         if quiet_start <= current_time_obj < quiet_end:
             print("It's quiet hours!")
