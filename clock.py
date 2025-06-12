@@ -5,11 +5,11 @@ from datetime import datetime, time
 import os
 
 # Load the shared bird data
-with open("bird_data.json", "r") as f:
+with open("data/schedule.json", "r") as f:
     bird_data = json.load(f)
 
 # State file for tracking last displayed bird
-STATE_FILE = "display_state.json"
+STATE_FILE = "data/display_state.json"
 
 
 def load_last_displayed_bird():
@@ -88,8 +88,8 @@ def prepare_image(image_path, target_width, target_height):
     # Open the image
     image = Image.open(image_path)
 
-    # Rotate image 90° for portrait orientation
-    image = image.rotate(270, expand=True)
+    # Rotate image 90° for portrait orientation, 270° for portrait but upside-down
+    image = image.rotate(90, expand=True)
 
     # Calculate aspect ratios
     img_ratio = image.width / image.height
@@ -128,24 +128,24 @@ saturation = 0.5
 
 
 # Run
-if __name__ == "__main__":
-    try:
-        current_datetime = datetime.now()
-        result = get_current_bird(current_datetime)
-        print(f"Final result: {result}")
+# if __name__ == "__main__": # Do I need this?
+try:
+    current_datetime = datetime.now()
+    result = get_current_bird(current_datetime)
+    print(f"Final result: {result}")
 
-        # Check if the bird is already displayed
-        last_bird = load_last_displayed_bird()
-        if last_bird == result:
-            print(f"Bird {result} is already displayed, skipping update")
-            exit(0)
+    # Check if the bird is already displayed
+    last_bird = load_last_displayed_bird()
+    if last_bird == result:
+        print(f"Bird {result} is already displayed, skipping update")
+        exit(0)
 
-        full_image_url = f"birds/{result}/{result}.jpg"
-        processed_image = prepare_image(full_image_url, display_width, display_height)
-        print(f"Displaying {result} on e-ink display")
+    full_image_url = f"data/birds/{result}/{result}.jpg"
+    processed_image = prepare_image(full_image_url, display_width, display_height)
+    print(f"Displaying {result} on e-ink display")
 
-        inky.set_image(processed_image, saturation=saturation)
-        save_last_displayed_bird(result)
-    except Exception as e:
-        print(f"Error: {e}")
-    inky.show()
+    inky.set_image(processed_image, saturation=saturation)
+    save_last_displayed_bird(result)
+except Exception as e:
+    print(f"Error: {e}")
+inky.show()
