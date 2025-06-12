@@ -4,15 +4,33 @@
 
 See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery from this repository to that one.
 
+## Quick start
+
+On your Raspberry Pi, after :
+
+```bash
+# Install Inky library for your Inky Impression display
+source ~/.virtualenvs/pimoroni/bin/activate
+cd inky
+./install.sh
+
+# Activate their venv
+source ~/.virtualenvs/pimoroni/bin/activate
+
+# Get the Cuckoo Clock going!
+git clone https://github.com/dnywh/cuckoo-clock
+cd cuckoo-clock
+```
+
 ## Features
 
 ### Simulator
 
-Use the simulator.py file on your Mac or PC to test out image renders before investing in or setting up an e-ink display and Raspberry Pi.
+The [`simulator`](https://github.com/dnywh/cuckoo-clock/blob/main/simulator) directory contains some progressivesly-more involved example files to help you go from your Mac, to just a button press, to button press and sound, to the whole shebang with image rendering on your Inky Impression display.
 
-### Inky's library
+### Inky library
 
-Follow Pimoroni's instructions for setting up your Inky display. The steps can be boiled down to:
+Follow [Pimoroni’s instructions](https://github.com/pimoroni/inky) for setting up your Inky display. The steps can be boiled down to:
 
 ```bash
 python3 -m venv --system-site-packages $HOME/.virtualenvs/pimoroni
@@ -20,7 +38,7 @@ source ~/.virtualenvs/pimoroni/bin/activate
 pip install inky
 ```
 
-You may also need to manually enable i2c and spi on your Rapsberry Pi.
+You may also need to manually enable I2C and SPI on your Rapsberry Pi.
 
 Try running their example files before continuing.
 
@@ -28,15 +46,16 @@ Try running their example files before continuing.
 
 You can (and should) set Cuckoo Clock up on a regular schedule via CRON. See the \_[crontab.example](https://github.com/dnywh/cuckoo-clock/blob/main/crontab.example) and [clock_runner.sh](https://github.com/dnywh/cuckoo-clock/blob/main/clock_runner.sh) file for what it might look like. Note that the CRON job(s) I've set up will automatically create logs for debugging.
 
-First, create the logs directory (required for CRON logging):
+First, install the Inky library and clone this repo onto your Pi, as described above. Then, create the logs directory (required for CRON logging):
 
 ```bash
+# Create a logs directory (at the root level as you might use it for other stuff)
 mkdir -p /home/pi/logs
 
 # Set permissions for logs directory
 chmod 755 /home/pi/logs
 
-# Make the runner executable
+# Make the clock runner executable
 chmod +x /home/pi/cuckoo-clock/clock_runner.sh
 
 # Set up the CRON schedule
@@ -51,7 +70,9 @@ You can test if the above works by running the following:
 /home/pi/cuckoo-clock/clock_runner.sh >/home/pi/logs/cronlog.log 2>&1
 ```
 
-See my [Pi Frame](https://github.com/dnywh/pi-frame?tab=readme-ov-file#scheduling) write up for more about scheduling.
+You should hopefully see the bird of the hour appear on your Inky!
+
+See my [Pi Frame documentation](https://github.com/dnywh/pi-frame?tab=readme-ov-file#scheduling) for more about scheduling.
 
 #### Display maintenance
 
@@ -60,13 +81,12 @@ To prevent ghosting on the e-ink display, the `clear.py` script runs at the begi
 Make sure both runner scripts are executable:
 
 ```bash
-chmod +x /home/pi/cuckoo-clock/clock_runner.sh
+# This one is new and important:
 chmod +x /home/pi/cuckoo-clock/clear_runner.sh
+
+# We did this one before, but just in case you missed it:
+chmod +x /home/pi/cuckoo-clock/clock_runner.sh
 ```
-
-#### Dynamic scheduling
-
-This is out of scope. But if you ever change your quiet hours, you'll need to also update your CRON schedule. There are ways to do this dynamically via a .sh file that syncs those quiet hours. You'll need to set that up yourself as I feel it adds too much complexity to the project.
 
 ### Button controls
 
@@ -74,7 +94,7 @@ The clock supports physical button interaction to play bird sounds. This runs as
 
 To set up the button handler:
 
-1. Make the button runner executable:
+1. Make the button runner executable, run:
 
    ```bash
    chmod +x /home/pi/cuckoo-clock/button_runner.sh
@@ -93,15 +113,15 @@ To set up the button handler:
    /home/pi/cuckoo-clock/button_runner.sh
    ```
 
-The button handler will automatically start on boot and log to `/home/pi/logs/button.log`.
+Hopefully, after pressing your button, you can hear a bird chirp!
 
-Currently, only the first button (A) is active and will play the sound of the currently displayed bird when pressed.
+The button handler will automatically start on boot and log to `/home/pi/logs/button.log`. The `button.py` file assumes you’re using GPIO pin 5. If you want to use the built-in Inky button(s), check out the `simulator/inky_buttons.py` file.
 
 ### Bird checks
 
-After looking up which bird is currently active, Cuckoo Clock will check to see if that bird happens to already be rendered to the e-ink display. If it is, it'll skip the update. This helps unnecessary screen re-renders, which is especially important here given the short lifespan of e-ink displays.
+After looking up which bird is currently active, Cuckoo Clock will check to see if that bird happens to already be rendered to the e-ink display. If it is, it’ll skip the update. This helps unnecessary screen re-renders, which is important given the short lifespan of e-ink displays.
 
-I've set up `display_state.json` ahead of time to show you how this is structured. It assumes the `red-wattlebird` is currently active. Simply delete this file if you want to start afresh. Otherwise it will quietly be overriden as the clock goes through various birds.
+I’ve set up `display_state.json` ahead of time to show you how this is structured. It assumes the `red-wattlebird` is currently active. Simply delete this file if you want to start afresh. Otherwise it will quietly be overriden as the clock goes through various birds.
 
 ## Installation
 
@@ -150,14 +170,15 @@ I've set up `display_state.json` ahead of time to show you how this is structure
 If you're setting up on a Raspberry Pi, make sure you have the necessary hardware:
 
 - E-ink display (Pimoroni Inky Impression)
+- Standard button
 
 I'm using a Pimoroni Inky Impression. You'll need to adapt the code to match your own e-ink display, if it differs.
 
-The CRON schedule should match the quiet hours for each of the four seasons set out in [birds.json](birds.json).
+The CRON schedule should match the quiet hours for each of the four seasons set out in [schedule.json](schedule.json).
 
 ### Running the project
 
-1. Ensure you have the `birds_data.json` file in the project directory.
+1. Ensure you have the `schedule.json` file in the project directory.
 
 2. Create a `birds` folder in the project directory with subfolders for each bird, containing the images (`.jpg`) and sound files (`.mp3`).
 

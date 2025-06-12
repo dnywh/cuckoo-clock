@@ -5,11 +5,11 @@ from datetime import datetime, time
 import os
 
 # Load the shared bird data
-with open("data/schedule.json", "r") as f:
-    bird_data = json.load(f)
+with open("schedule.json", "r") as f:
+    schedule = json.load(f)
 
 # State file for tracking last displayed bird
-STATE_FILE = "data/display_state.json"
+STATE_FILE = "display_state.json"
 
 
 def load_last_displayed_bird():
@@ -47,7 +47,7 @@ def get_current_bird(current_datetime):
     print(f"Current month: {current_month}")
 
     # Check if it's quiet hours
-    quiet_hours = bird_data["quietHours"]
+    quiet_hours = schedule["quietHours"]
     quiet_start = parse_time(quiet_hours["start"])
     quiet_end = parse_time(quiet_hours["end"])
 
@@ -62,7 +62,7 @@ def get_current_bird(current_datetime):
             return "quiet-hours", current_time
 
     # Get the birds for the current month
-    month_birds = bird_data["months"][str(current_month)]
+    month_birds = schedule["months"][str(current_month)]
 
     # Find the bird whose time matches or is closest to the current time
     current_bird = None
@@ -140,7 +140,7 @@ try:
         print(f"Bird {result} is already displayed, skipping update")
         exit(0)
 
-    full_image_url = f"data/birds/{result}/{result}.jpg"
+    full_image_url = f"birds/{result}/{result}.jpg"
     processed_image = prepare_image(full_image_url, display_width, display_height)
     print(f"Displaying {result} on e-ink display")
 

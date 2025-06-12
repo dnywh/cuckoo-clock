@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "bird_data.json"
+      - "schedule.json"
       - "birds/**/*.jpg"
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
 
       - name: Copy JSON file
         run: |
-          cp cuckoo-clock/bird_data.json cuckoo-clock-site/src/data/bird_data.json
+          cp cuckoo-clock/schedule.json cuckoo-clock-site/src/data/schedule.json
 
       - name: Sync JPG files
         run: |

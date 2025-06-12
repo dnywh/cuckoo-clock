@@ -10,10 +10,10 @@ source /home/pi/.virtualenvs/pimoroni/bin/activate
 cd /home/pi/cuckoo-clock/
 
 # Run the script (no sudo needed)
-# I'm using a Raspberry Pi Model B+ v1.2 which needs to be prefaced with a revision number
-RPI_LGPIO_REVISION="900032" python button.py
+# I'm using a Raspberry Pi Model B+ v1.2 which needs to be prefaced with a revision number, like this:
+# RPI_LGPIO_REVISION="900032" python button.py
 # You can probably just run:
-# python button.py
+python button.py
 
 # Deactivate the virtual environment (good practice)
 deactivate 
