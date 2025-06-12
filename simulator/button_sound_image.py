@@ -4,13 +4,26 @@ import os
 import RPi.GPIO as GPIO
 import time
 import random
+from PIL import Image, ImageDraw
+from inky.auto import auto  # The Inky Impression driver
+
 
 # Setup
+# Display
+inky_display = auto(
+    ask_user=True, verbose=True
+)  # Not sure if I need this, I could just hardcode the display
+
+# Buttons
+BUTTON_GPIO_PIN = 5
 GPIO.setmode(GPIO.BCM)  # Use GPIO numbers (not pin numbers)
-GPIO.setup(2, GPIO.IN)  # Let the Pi handle the pull-up
+GPIO.setup(
+    BUTTON_GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP
+)  # Enable pull-up on GPIO 5
 
 print("Welcome! Press the button to play a random bird sound, or CTRL+C to quit")
 
+# Sounds
 # Define the sound directory and file extension
 SOUND_DIR = "sounds"  # Directory containing your sound files
 SOUND_EXT = ".mp3"  # File extension for your sound files
@@ -22,6 +35,18 @@ MAX_VOLUME = 0.5  # Maximum volume level (0.0 to 1.0)
 
 # Track last played sound to avoid repeats
 last_played = None
+
+
+# Create new PIL image with a white background
+image = Image.new("P", (inky_display.width, inky_display.height), inky_display.WHITE)
+draw = ImageDraw.Draw(image)
+# draw some shapes
+draw.rectangle((50, 50, 200, 200), fill=inky_display.RED)  # Rectangle
+draw.ellipse((150, 150, 300, 300), fill=inky_display.YELLOW)  # Circle (ellipse)
+draw.line((0, 0, 400, 400), fill=inky_display.BLUE, width=10)  # Diagonal line
+# Render to screen!
+inky_display.set_image(image)
+inky_display.show()
 
 
 def get_sound_path(filename):
@@ -72,7 +97,9 @@ def play_music(music_file):
 
     # Check for button presses while sound is playing
     while pg.mixer.music.get_busy():
-        if GPIO.input(2) == GPIO.LOW:  # Button pressed while sound is playing
+        if (
+            GPIO.input(BUTTON_GPIO_PIN) == GPIO.LOW
+        ):  # Button pressed while sound is playing
             print("Skipping current sound...")
             pg.mixer.music.fadeout(FADE_DURATION)
             time.sleep(0.3)  # Debounce delay
@@ -114,7 +141,7 @@ def get_random_sound():
 
 try:
     while True:
-        if GPIO.input(2) == GPIO.LOW:  # Button pressed (LOW = grounded)
+        if GPIO.input(BUTTON_GPIO_PIN) == GPIO.LOW:  # Button pressed (LOW = grounded)
             print("Pressed at:", time.strftime("%H:%M:%S"))
             selected_sound = get_random_sound()
             print(f"Selected sound: {selected_sound}")
