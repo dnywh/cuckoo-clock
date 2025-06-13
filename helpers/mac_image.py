@@ -1,3 +1,4 @@
+# Simulates the e-ink display on your Mac
 import json
 import random
 import time

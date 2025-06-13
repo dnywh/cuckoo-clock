@@ -1,7 +1,7 @@
 from inky.auto import auto
 from PIL import Image
 import json
-from datetime import datetime, time
+from datetime import datetime
 import os
 
 # Load the shared bird data
@@ -58,7 +58,7 @@ def get_current_bird(current_datetime):
             return (
                 "quiet-hours",
                 current_time,
-            )  # This `quiet-hours` value is checked in button.py
+            )  # This `quiet-hours` value is checked in button.py (as a backup if STATE_FILE is not missing)
     else:
         if quiet_start <= current_time_obj < quiet_end:
             print("It's quiet hours!")
@@ -131,7 +131,6 @@ saturation = 0.5
 
 
 # Run
-# if __name__ == "__main__": # Do I need this?
 try:
     current_datetime = datetime.now()
     result = get_current_bird(current_datetime)

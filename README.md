@@ -2,11 +2,13 @@
 
 `clock.py` changes the bird via a CRON schedule. `button.py` plays a sound for the current bird whenever the button is pressed. `clear.py`. nicely wipes the e-ink display before sleep.
 
-See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). A [GitHub Action](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery from this repository to that one.
+See also the [companion site](http://github.com/dnywh/cuckoo-clock-site). [GitHub Actions](https://github.com/dnywh/cuckoo-clock/blob/main/.github/workflows/sync-birds.yml) syncs bird data and imagery between the two repositories.
+
+All of the sound and image files are in the public domain. The companion site’s [Colophon](https://clock.dannywhite.net/colophon) provides more information, including credits.
 
 ## Quick start
 
-On your Raspberry Pi, after :
+On your Raspberry Pi:
 
 ```bash
 # Install Inky library for your Inky Impression display
@@ -24,9 +26,9 @@ cd cuckoo-clock
 
 ## Features
 
-### Simulator
+### Helpers
 
-The [`simulator`](https://github.com/dnywh/cuckoo-clock/blob/main/simulator) directory contains some progressivesly-more involved example files to help you go from your Mac, to just a button press, to button press and sound, to the whole shebang with image rendering on your Inky Impression display.
+The [`helpers`](https://github.com/dnywh/cuckoo-clock/blob/main/simulator) directory contains some progressivesly-more involved helper and example files to help you go from your Mac, to just a button press, to button press and sound, to the whole shebang with image rendering on your Inky Impression display.
 
 ### Inky library
 
@@ -115,7 +117,7 @@ To set up the button handler:
 
 Give it a minute to print that it’s ready. Then, after pressing your button, you should hear a bird chirp!
 
-The button handler will automatically start on boot and log to `/home/pi/logs/button.log`. The `button.py` file assumes you’re using GPIO pin 5. If you want to use the built-in Inky button(s), check out the `simulator/inky_buttons.py` file.
+The button handler will automatically start on boot and log to `/home/pi/logs/button.log`. The `button.py` file assumes you have used what’s already set as `BUTTON_GPIO_PIN`, or that you’ve edited that value. If you want to use the built-in Inky button(s), check out the `helpers/inky_buttons.py` file.
 
 ### Bird checks
 
@@ -188,3 +190,7 @@ The CRON schedule should match the quiet hours for each of the four seasons set 
    source ~/.virtualenvs/pimoroni/bin/activate
    python clock.py
    ```
+
+## Colophon
+
+You can find more information about how it all works on the [Colophon](https://clock.dannywhite.net/colophon) page.

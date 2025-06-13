@@ -1,4 +1,4 @@
-# Run Cuckoo Clock if the Raspberry Pi is rebooted
+# Run Cuckoo Clock on reboot
 @reboot /home/pi/cuckoo-clock/clock_runner.sh >>/home/pi/logs/cronlog.log 2>&1
 
 # Start the button handler on reboot

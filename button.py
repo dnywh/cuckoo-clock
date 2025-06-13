@@ -7,16 +7,17 @@ import RPi.GPIO as GPIO
 import pygame as pg
 import time
 
-# from datetime import datetime
+# State file for tracking last displayed bird
+STATE_FILE = "display_state.json"
 
-print("button.py - Plays a sound when button is pressed.")
+print("button.py: Plays a bird sound when button is pressed.")
 
 # Setup
-BUTTON_GPIO_PIN = 5
+BUTTON_GPIO_PIN = 6
 GPIO.setmode(GPIO.BCM)  # Use GPIO numbers (not pin numbers)
 GPIO.setup(
     BUTTON_GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP
-)  # Enable pull-up on GPIO 5
+)  # Enable pull-up on selected GPIO pin
 
 # Fade settings
 FADE_DURATION = 500  # 0.5 seconds for both fade in and out
@@ -51,12 +52,13 @@ for attempt in range(max_attempts):
 
 def get_current_bird():
     try:
-        with open("display_state.json", "r") as f:
+        with open(STATE_FILE, "r") as f:
             state = json.load(f)
             return state.get("last_bird")
     except Exception as e:
-        print(f"Error reading current bird: {e}")
-        return None
+        print(f"Error reading state file: {e}")
+        # If state file is missing, it must be quiet hours
+        return "quiet-hours"
 
 
 def fade_in():
@@ -117,7 +119,7 @@ def play_bird_sound(bird_name):
                 return True  # Return True to indicate we should play a new sound
             time.sleep(0.1)
 
-        print(f"Sound finished playing")
+        print(f"Finished sound for {bird_name}")
         return False
     except Exception as e:
         print(f"Error playing sound: {e}")
@@ -149,5 +151,9 @@ def handle_button(pin):
 # Attach the button handler
 GPIO.add_event_detect(BUTTON_GPIO_PIN, GPIO.FALLING, handle_button, bouncetime=250)
 
-# Keep the script running
-signal.pause()
+try:
+    # Keep the script running
+    signal.pause()
+finally:
+    print("Cleaning up GPIO...")
+    GPIO.cleanup()
